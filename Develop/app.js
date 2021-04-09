@@ -10,8 +10,86 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const questions = ([
+        {
+            type: 'list',
+            name: 'title',
+            choices: [ "manager", new inquirer.Separator(), "engineer", new inquirer.Separator(), "intern" ],
+            message: 'Employee role:',
+            when: () => true
+          },   
+          {
+            type: 'input',
+            name: 'name',
+            message: 'First and last name:'
+          },
+          {
+            type: 'input',
+            name: 'id',
+            message: 'Employee id:'
+          },
+          {
+            type: 'input',
+            name: 'email',
+            message: 'Employee email:'
+          },
+          {
+            type: 'input',
+            name: 'officeNumber',
+            message: 'Office number:',
+            when: (answers) => answers.role === "manager"
+          },
+        {
+           type: 'input',
+           name: 'github',
+           message: 'What is your GitHub username?',
+           when: (answers) => answers.role === "engineer"
+         },
+         {
+           type: 'input',
+           name: 'school',
+           message: 'Enter school:'
+         },
+         {
+            type: 'list',
+            name: 'another',
+            choices: ["yes", "no"],
+            message: 'Would you like to add another employee?'
+          }
 
-render();
+]);
+
+const employees = [];
+
+function renderTeam() {
+    inquirer.prompt(questions).then((answers) => {
+        if (answers.role === "manager") {
+            const manager = new Manager(answers.name, answers.id, answers.email, answers.school)
+            employees.push(manager);
+        } else if (answers.role === "engineer") {
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.school)
+            employees.push(engineer);
+        } else (answers.role === "intern") {
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+            employees.push(intern);
+        }
+
+        if (answers.more === "yes") {
+            renderTeam();
+        } else { render(employees);
+            writeToFile("Team-Summary", render(employees));
+        }
+    });
+}
+
+renderTeam();
+
+function writeToFile(fileName, data) {
+    fs.writeFileSync(`output-${fileName}.html`, data);
+}
+
+
+// render();
 
 
 // Write code to use inquirer to gather information about the development team members,
@@ -26,6 +104,8 @@ render();
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
+
+
 
 // HINT: each employee type (manager, engineer, or intern) has slightly different
 // information; write your code to ask different questions via inquirer depending on
