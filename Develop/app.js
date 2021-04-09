@@ -64,14 +64,16 @@ const employees = [];
 function renderTeam() {
     inquirer.prompt(questions).then((answers) => {
         if (answers.role === "manager") {
-            const manager = new Manager(answers.name, answers.id, answers.email, answers.school)
+            const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             employees.push(manager);
         } else if (answers.role === "engineer") {
-            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.school)
+            const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
             employees.push(engineer);
-        } else (answers.role === "intern") {
-            const intern = new Intern(answers.name, answers.id, answers.email, answers.school)
+        } else if (answers.role === "intern") {
+            const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
             employees.push(intern);
+        } else {
+            console.log('please choose one.')
         }
 
         if (answers.more === "yes") {
