@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 const questions = ([
         {
             type: 'list',
-            name: 'title',
+            name: 'role',
             choices: [ "manager", new inquirer.Separator(), "engineer", new inquirer.Separator(), "intern" ],
             message: 'Employee role:',
             when: () => true
@@ -48,7 +48,8 @@ const questions = ([
          {
            type: 'input',
            name: 'school',
-           message: 'Enter school:'
+           message: 'Enter school:',
+           when: (answers) => answers.role === "intern"
          },
          {
             type: 'list',
@@ -106,15 +107,3 @@ function writeToFile(fileName, data) {
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
-
-
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
