@@ -16,12 +16,16 @@
 
 ## Installation
 *Steps required to install project and get the development environment established.*
-* Simply enter `node app.js` to run the application. The application will prompt the user to enter information about the team. When all of the information has been entered the program will generate an HTML file. Go to output-Team-Summary.html and open in your browser to see the team that has been generated. 
-* Type `npm run test` in your terminal to run tests using jest.
+* Clone this repo and open in your coding editor of choice. 
+* Type `npm install` in your terminal to install all required applications.
 
 ## Usage
 *Instructions and examples for use:* 
-* Use the Inquirer npm package to prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
+* Type `npm run test` in your terminal to run tests using jest.
+* Enter `node app.js` into your terminal to run the application. 
+* The application will prompt the user to enter information about the team. 
+* When all of the information has been entered the program will generate an HTML file. 
+* Go to output-Team-Summary.html and open in your browser to see the team that has been generated.
 * <a href="https://youtu.be/OKaovXvOLmM">Click here to see a video of the application being used.</a>
 <img src="Assets/temp-engine.gif">
 
